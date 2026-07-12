@@ -145,6 +145,8 @@
   .cat-add input[type=text],.cat-add input[type=number]{border:1px solid var(--line);border-radius:5px;padding:7px 8px;font-size:13px;width:100%;}
   .cat-add input[type=number]{text-align:right;}
   .col-labels{display:grid;grid-template-columns:1fr 1.4fr 130px 90px 34px;gap:8px;padding:4px 0 8px 0;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);min-width:560px;}
+  .prod-row.has-capacity,.cat-add.has-capacity,.col-labels.has-capacity{grid-template-columns:1fr 1.3fr 110px 130px 90px 34px;min-width:660px;}
+  .cat-add.has-capacity{grid-template-columns:1fr 1.3fr 110px 130px 90px 90px;}
   .empty-cat{padding:14px 0;color:var(--muted);font-size:13px;font-style:italic;}
 
   /* ============ TEMPLATES ============ */
@@ -186,6 +188,34 @@
   .field label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
   .field input,.field textarea{border:1px solid var(--line);border-radius:7px;padding:9px 11px;font-size:13px;font-family:inherit;}
   .field textarea{resize:vertical;min-height:64px;}
+
+  /* ============ SYSTEM CALCULATOR ============ */
+  .calc-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:start;}
+  .calc-col{min-width:0;}
+  .calc-hint{font-size:12.5px;color:var(--muted);margin:-8px 0 16px 0;line-height:1.5;}
+  .calc-quick-add{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+  .calc-quick-add .combo-pill{font-weight:600;}
+  .appliance-grid{grid-template-columns:1.6fr 90px 70px 110px 34px;}
+  .calc-appliance-add{display:grid;grid-template-columns:1.6fr 90px 70px 90px;gap:8px;align-items:center;padding:10px 0 0 0;}
+  .calc-appliance-add input{border:1px solid var(--line);border-radius:5px;padding:7px 8px;font-size:13px;width:100%;}
+  .calc-results-card{position:sticky;top:0;}
+  .calc-breakdown{background:var(--stripe);border-radius:9px;padding:14px 16px;margin-bottom:16px;}
+  .calc-line{display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;color:var(--ink-2);}
+  .calc-line span:first-child{color:var(--muted);}
+  .calc-result-row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);}
+  .calc-result-row:last-child{border-bottom:none;}
+  .calc-result-k{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;flex:none;padding-top:2px;}
+  .calc-result-v{font-size:13px;font-weight:600;color:var(--ink);text-align:right;}
+  .calc-disclaimer{font-size:11px;color:var(--muted);line-height:1.5;margin:14px 0 0 0;}
+  .calc-warn{background:#fff6e0;border-radius:9px;padding:12px 14px;font-size:12.5px;color:#8a6300;line-height:1.5;}
+  .calc-warn a{color:#8a6300;text-decoration:underline;}
+  @media (max-width:900px){
+    .calc-grid{grid-template-columns:1fr;}
+    .calc-results-card{position:static;}
+  }
+  @media (max-width:640px){
+    .calc-appliance-add{grid-template-columns:1fr;}
+  }
 
   /* ============ QUOTE BUILDER ============ */
   .client-bar{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 20px;display:flex;flex-wrap:wrap;gap:14px;margin-bottom:20px;}
@@ -490,6 +520,10 @@
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-9"/><path d="M10 20v-6h4v6"/></svg>
       Dashboard
     </div>
+    <div class="nav-item" data-view="calculator">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+      System Calculator
+    </div>
     <div class="nav-item" data-view="builder">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6M9 9h2"/></svg>
       Quote Builder
@@ -576,6 +610,49 @@
             <div class="step"><div class="num">1</div><div class="txt"><b>Add your products</b><span>List every inverter, battery and panel variant you sell, with pricing, once in the Product Catalog.</span></div></div>
             <div class="step"><div class="num">2</div><div class="txt"><b>Build the quote</b><span>Pick products from the catalog into one or more packages, set quantities, and totals calculate automatically.</span></div></div>
             <div class="step"><div class="num">3</div><div class="txt"><b>Export and send</b><span>Export to a branded PDF — your account details are always included, ready to send to the client.</span></div></div>
+          </div>
+        </div>
+
+        <!-- ============ SYSTEM CALCULATOR ============ -->
+        <div class="view" id="calculatorView">
+          <div class="calc-grid">
+            <div class="calc-col">
+              <div class="settings-card">
+                <h3>Load Details</h3>
+                <p class="calc-hint">Add the appliances that need power, or skip ahead and enter a total connected load directly.</p>
+                <div class="calc-quick-add no-print" id="quickAddRow"></div>
+                <div id="applianceList"></div>
+                <div class="calc-appliance-add no-print">
+                  <input type="text" placeholder="Custom appliance name" id="applianceName">
+                  <input type="number" placeholder="Watts" id="applianceWatts">
+                  <input type="number" placeholder="Qty" id="applianceQty" value="1" min="1">
+                  <button class="small primary" id="addApplianceBtn">+ Add</button>
+                </div>
+                <div class="field" style="margin-top:18px;">
+                  <label>Total Connected Load Override (W) — optional</label>
+                  <input type="number" id="loadOverride" placeholder="Leave blank to use the appliance list above">
+                </div>
+              </div>
+
+              <div class="settings-card">
+                <h3>System Parameters</h3>
+                <div class="settings-grid">
+                  <div class="field"><label>Backup Hours Required</label><input type="number" id="calcBackupHours" value="8"></div>
+                  <div class="field"><label>Avg. Daily Sun Hours</label><input type="number" id="calcSunHours" value="5"></div>
+                  <div class="field"><label>Battery Depth of Discharge (%)</label><input type="number" id="calcDod" value="80"></div>
+                  <div class="field"><label>Safety Margin (%)</label><input type="number" id="calcMargin" value="25"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="calc-col">
+              <div class="settings-card calc-results-card">
+                <h3>Estimated System Configuration</h3>
+                <div id="calcResults"></div>
+                <button class="primary" id="calcCreateBtn" style="margin-top:18px;width:100%;" disabled>Create Quotation from This Estimate</button>
+                <p class="calc-disclaimer">This is a preliminary estimate based on the inputs above and your current product catalog — a site assessment may refine final sizing.</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -729,11 +806,13 @@ const AUTH_KEY = 'gevron-auth';
 const ACTIVITY_KEY = 'gevron-activity';
 const BRAND_TAGLINE = "• Power • Automation • Security";
 
+const CAPACITY_UNIT = {Inverter:"kVA", Battery:"kWh", "Solar Panel":"W"};
+
 const DEFAULT_CATALOG = [
-  {id:"p1", category:"Inverter", brand:"Deye", spec:"16kVA Hybrid Inverter", unitCost:4000000, taxable:false},
-  {id:"p10", category:"Inverter", brand:"Deye", spec:"8kVA Hybrid Inverter", unitCost:2200000, taxable:false},
-  {id:"p2", category:"Battery", brand:"", spec:"16kWh Lithium Battery", unitCost:3000000, taxable:false},
-  {id:"p3", category:"Solar Panel", brand:"", spec:"600W Mono Solar Panel", unitCost:155000, taxable:false},
+  {id:"p1", category:"Inverter", brand:"Deye", spec:"16kVA Hybrid Inverter", unitCost:4000000, taxable:false, capacity:16},
+  {id:"p10", category:"Inverter", brand:"Deye", spec:"8kVA Hybrid Inverter", unitCost:2200000, taxable:false, capacity:8},
+  {id:"p2", category:"Battery", brand:"", spec:"16kWh Lithium Battery", unitCost:3000000, taxable:false, capacity:16},
+  {id:"p3", category:"Solar Panel", brand:"", spec:"600W Mono Solar Panel", unitCost:155000, taxable:false, capacity:600},
   {id:"p4", category:"Accessory", brand:"", spec:"6mm² Flexible DC Cable", unitCost:6000, taxable:true},
   {id:"p5", category:"Accessory", brand:"", spec:"AC/DC Solar Surge Protector", unitCost:150000, taxable:true},
   {id:"p6", category:"Accessory", brand:"", spec:"Solar Roof Profile", unitCost:200000, taxable:true},
@@ -817,6 +896,7 @@ let currentView = 'dashboard';
 let adminSearchTerm = '';
 let activityFilter = 'all';
 let activitySearchTerm = '';
+let calcAppliances = [];
 
 function uid(){ return 'x'+Math.random().toString(36).slice(2,10); }
 function naira(n){ return '₦' + Math.round(n||0).toLocaleString('en-NG'); }
@@ -864,7 +944,14 @@ async function initApp(){
     settings = Object.assign({}, DEFAULT_SETTINGS);
   }
   activityLog = await storeGet(ACTIVITY_KEY) || [];
+  catalog.forEach(p=>{
+    if(!p.capacity && CAPACITY_UNIT[p.category]){
+      const m = p.spec.match(/(\d+(?:\.\d+)?)/);
+      if(m) p.capacity = parseFloat(m[1]);
+    }
+  });
   bindGlobalControls();
+  bindCalculatorControls();
   syncSettingsUI();
   applyTheme();
   renderThemePicker();
@@ -878,6 +965,7 @@ async function initApp(){
 
 const VIEW_META = {
   dashboard:{title:"Dashboard", sub:"Overview of your quoting workspace"},
+  calculator:{title:"System Calculator", sub:"Estimate an inverter, battery and solar configuration from your load"},
   builder:{title:"Quote Builder", sub:"Configure packages and export a client-ready PDF"},
   catalog:{title:"Product Catalog", sub:"Your inverters, batteries, panels and accessories"},
   templates:{title:"Templates", sub:"Reusable package configurations"},
@@ -911,6 +999,7 @@ function switchView(v){
   if(v==='builder') renderPackages();
   if(v==='templates') renderTemplates();
   if(v==='activity') renderActivityLog();
+  if(v==='calculator'){ renderQuickAdd(); renderApplianceList(); runCalculator(); }
 }
 
 function newQuote(){
@@ -1135,19 +1224,24 @@ function renderCatalog(){
   CATEGORIES.forEach(cat=>{
     let items = catalog.filter(p=>p.category===cat);
     if(adminSearchTerm){ items = items.filter(p=> (p.brand+' '+p.spec).toLowerCase().includes(adminSearchTerm)); }
+    const unit = CAPACITY_UNIT[cat];
+    const rowClass = unit ? 'prod-row has-capacity' : 'prod-row';
+    const labelClass = unit ? 'col-labels has-capacity' : 'col-labels';
+    const addClass = unit ? 'cat-add has-capacity no-print' : 'cat-add no-print';
     const card = document.createElement('div');
     card.className='cat-card';
     card.innerHTML = `
       <div class="cat-head"><span class="cat-head-title">${cat==='Inverter'?ICONS.zap:cat==='Battery'?ICONS.battery:cat==='Solar Panel'?ICONS.sun:ICONS.tool}${CATEGORY_PLURAL[cat]}</span> <span class="count">${items.length} product${items.length===1?'':'s'}</span></div>
       <div class="cat-rows">
         <div class="cat-scroll">
-        ${items.length ? `<div class="col-labels"><span>Brand</span><span>Model / Spec</span><span>Unit Cost (₦)</span><span>VATable</span><span></span></div>` : `<div class="empty-cat">No ${cat.toLowerCase()} products yet — add your first one below.</div>`}
+        ${items.length ? `<div class="${labelClass}"><span>Brand</span><span>Model / Spec</span>${unit?`<span>Capacity (${unit})</span>`:''}<span>Unit Cost (₦)</span><span>VATable</span><span></span></div>` : `<div class="empty-cat">No ${cat.toLowerCase()} products yet — add your first one below.</div>`}
         <div class="rows-inner"></div>
         </div>
       </div>
-      <div class="cat-add no-print">
+      <div class="${addClass}">
         <input type="text" placeholder="Brand (e.g. Growatt)" data-newbrand>
         <input type="text" placeholder="Model / Spec (e.g. 12kVA Hybrid Inverter)" data-newspec>
+        ${unit?`<input type="number" placeholder="${unit}" data-newcapacity>`:''}
         <input type="number" placeholder="Unit cost" data-newcost>
         <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);"><input type="checkbox" data-newtax> VATable</label>
         <button class="small primary" data-addprod>+ Add</button>
@@ -1156,10 +1250,11 @@ function renderCatalog(){
     const rowsInner = card.querySelector('.rows-inner');
     items.forEach(p=>{
       const row = document.createElement('div');
-      row.className='prod-row';
+      row.className=rowClass;
       row.innerHTML = `
         <input type="text" value="${escapeHtml(p.brand)}" data-f="brand" placeholder="—">
         <input type="text" value="${escapeHtml(p.spec)}" data-f="spec">
+        ${unit?`<input type="number" value="${p.capacity||0}" data-f="capacity">`:''}
         <input type="number" value="${p.unitCost}" data-f="unitCost">
         <span class="tax"><input type="checkbox" ${p.taxable?'checked':''} data-f="taxable"></span>
         <button class="ghost small no-print" data-del="1">✕</button>
@@ -1168,6 +1263,8 @@ function renderCatalog(){
       row.querySelector('[data-f=spec]').oninput = e=>{ p.spec=e.target.value; scheduleSave(); };
       row.querySelector('[data-f=unitCost]').oninput = e=>{ p.unitCost=parseFloat(e.target.value)||0; scheduleSave(); };
       row.querySelector('[data-f=taxable]').onchange = e=>{ p.taxable=e.target.checked; scheduleSave(); };
+      const capInput = row.querySelector('[data-f=capacity]');
+      if(capInput) capInput.oninput = e=>{ p.capacity=parseFloat(e.target.value)||0; scheduleSave(); };
       row.querySelector('[data-del]').onclick = ()=>{
         if(!confirm('Remove this product from the catalog?')) return;
         catalog = catalog.filter(x=>x.id!==p.id);
@@ -1180,12 +1277,214 @@ function renderCatalog(){
       const spec = card.querySelector('[data-newspec]').value.trim();
       const cost = parseFloat(card.querySelector('[data-newcost]').value)||0;
       const tax = card.querySelector('[data-newtax]').checked;
+      const capacityInput = card.querySelector('[data-newcapacity]');
+      const capacity = capacityInput ? (parseFloat(capacityInput.value)||0) : undefined;
       if(!spec){ alert('Enter a model / spec name.'); return; }
-      catalog.push({id:uid(), category:cat, brand, spec, unitCost:cost, taxable:tax});
+      catalog.push({id:uid(), category:cat, brand, spec, unitCost:cost, taxable:tax, capacity});
       renderCatalog(); scheduleSave();
     };
     wrap.appendChild(card);
   });
+}
+
+/* ================= SYSTEM CALCULATOR ================= */
+const COMMON_APPLIANCES = [
+  {name:"LED Bulb", watts:10},
+  {name:"Ceiling Fan", watts:75},
+  {name:"LED TV", watts:120},
+  {name:"Refrigerator", watts:150},
+  {name:"Chest Freezer", watts:200},
+  {name:"Router / Modem", watts:15},
+  {name:"Laptop", watts:65},
+  {name:"Desktop Computer", watts:200},
+  {name:"Washing Machine", watts:500},
+  {name:"Microwave", watts:1000},
+  {name:"Electric Iron", watts:1000},
+  {name:"Water Pump (0.5HP)", watts:750},
+  {name:"1HP Air Conditioner", watts:900},
+  {name:"1.5HP Air Conditioner", watts:1200},
+];
+
+function renderQuickAdd(){
+  const wrap = document.getElementById('quickAddRow');
+  if(!wrap) return;
+  wrap.innerHTML = COMMON_APPLIANCES.map(a=>
+    `<button type="button" class="combo-pill" data-qname="${escapeHtml(a.name)}" data-qwatts="${a.watts}">+ ${escapeHtml(a.name)} (${a.watts}W)</button>`
+  ).join('');
+  wrap.querySelectorAll('[data-qname]').forEach(btn=>{
+    btn.onclick = ()=>{
+      const name = btn.dataset.qname, watts = parseFloat(btn.dataset.qwatts);
+      const existing = calcAppliances.find(a=>a.name===name && a.watts===watts);
+      if(existing) existing.qty += 1;
+      else calcAppliances.push({id:uid(), name, watts, qty:1});
+      renderApplianceList(); runCalculator();
+    };
+  });
+}
+
+function renderApplianceList(){
+  const wrap = document.getElementById('applianceList');
+  if(!wrap) return;
+  if(!calcAppliances.length){
+    wrap.innerHTML = `<div class="empty-cat">No appliances added yet — use the quick-add buttons above or add a custom item below.</div>`;
+    return;
+  }
+  wrap.innerHTML = `
+    <div class="cat-scroll">
+    <div class="col-labels appliance-grid"><span>Appliance</span><span>Watts</span><span>Qty</span><span>Subtotal</span><span></span></div>
+    ${calcAppliances.map(a=>`
+      <div class="prod-row appliance-grid" data-appid="${a.id}">
+        <input type="text" value="${escapeHtml(a.name)}" data-f="name">
+        <input type="number" value="${a.watts}" data-f="watts">
+        <input type="number" value="${a.qty}" data-f="qty" min="1">
+        <span style="font-weight:600;">${plainNum(a.watts*a.qty)} W</span>
+        <button class="ghost small no-print" data-delapp>✕</button>
+      </div>
+    `).join('')}
+    </div>
+  `;
+  wrap.querySelectorAll('[data-appid]').forEach(row=>{
+    const a = calcAppliances.find(x=>x.id===row.dataset.appid);
+    if(!a) return;
+    row.querySelector('[data-f=name]').oninput = e=>{ a.name=e.target.value; };
+    row.querySelector('[data-f=watts]').oninput = e=>{ a.watts=parseFloat(e.target.value)||0; runCalculator(); };
+    row.querySelector('[data-f=qty]').oninput = e=>{ a.qty=parseFloat(e.target.value)||0; runCalculator(); };
+    row.querySelector('[data-delapp]').onclick = ()=>{
+      calcAppliances = calcAppliances.filter(x=>x.id!==a.id);
+      renderApplianceList(); runCalculator();
+    };
+  });
+}
+
+function calcTotalLoadWatts(){
+  const overrideEl = document.getElementById('loadOverride');
+  const override = overrideEl ? parseFloat(overrideEl.value) : NaN;
+  if(override > 0) return override;
+  return calcAppliances.reduce((sum,a)=> sum + (a.watts||0)*(a.qty||0), 0);
+}
+
+function sizeByStacking(category, requiredTotal){
+  const items = catalog.filter(p=>p.category===category && (p.capacity||0) > 0).sort((a,b)=>a.capacity-b.capacity);
+  if(!items.length) return null;
+  const direct = items.find(p=>p.capacity >= requiredTotal);
+  if(direct) return {product:direct, qty:1, totalCapacity:direct.capacity};
+  const largest = items[items.length-1];
+  const qty = Math.max(1, Math.ceil(requiredTotal / largest.capacity));
+  return {product:largest, qty, totalCapacity:largest.capacity*qty};
+}
+
+let lastEstimate = null;
+
+function runCalculator(){
+  const resultsEl = document.getElementById('calcResults');
+  const createBtn = document.getElementById('calcCreateBtn');
+  if(!resultsEl || !createBtn) return;
+
+  const totalLoadW = calcTotalLoadWatts();
+  const backupHours = parseFloat(document.getElementById('calcBackupHours').value) || 0;
+  const sunHours = parseFloat(document.getElementById('calcSunHours').value) || 1;
+  const dod = Math.min(0.99, Math.max(0.1, (parseFloat(document.getElementById('calcDod').value) || 80) / 100));
+  const margin = 1 + (Math.max(0, parseFloat(document.getElementById('calcMargin').value) || 0) / 100);
+
+  lastEstimate = null;
+
+  if(totalLoadW <= 0){
+    resultsEl.innerHTML = `<p class="calc-hint" style="margin-top:0;">Add your appliance loads above (or enter a total load override) to see an estimate.</p>`;
+    createBtn.disabled = true;
+    return;
+  }
+
+  const requiredKVA = (totalLoadW/1000) * margin / 0.8;
+  const energyNeededKWh = (totalLoadW/1000) * backupHours;
+  const batteryNameplateKWh = energyNeededKWh / dod;
+  const requiredArrayW = (energyNeededKWh*1000) / sunHours / 0.85;
+
+  const inv = sizeByStacking('Inverter', requiredKVA);
+  const bat = sizeByStacking('Battery', batteryNameplateKWh);
+  const pan = sizeByStacking('Solar Panel', requiredArrayW);
+
+  const missing = [];
+  if(!inv) missing.push('an Inverter');
+  if(!bat) missing.push('a Battery');
+  if(!pan) missing.push('a Solar Panel');
+
+  const breakdown = `
+    <div class="calc-breakdown">
+      <div class="calc-line"><span>Total Connected Load</span><span>${plainNum(totalLoadW)} W</span></div>
+      <div class="calc-line"><span>Backup Energy Need</span><span>${energyNeededKWh.toFixed(1)} kWh</span></div>
+      <div class="calc-line"><span>Required Inverter Capacity</span><span>${requiredKVA.toFixed(1)} kVA</span></div>
+      <div class="calc-line"><span>Required Battery Capacity</span><span>${batteryNameplateKWh.toFixed(1)} kWh</span></div>
+      <div class="calc-line"><span>Required Solar Array</span><span>${(requiredArrayW/1000).toFixed(2)} kW</span></div>
+    </div>
+  `;
+
+  if(missing.length){
+    resultsEl.innerHTML = breakdown + `<div class="calc-warn">Your catalog needs ${missing.join(', ')} product with a capacity set before this estimate can be completed. Add one in <a data-goto="catalog">Product Catalog</a>.</div>`;
+    resultsEl.querySelectorAll('[data-goto]').forEach(el=>{ el.onclick = ()=>switchView(el.dataset.goto); });
+    createBtn.disabled = true;
+    return;
+  }
+
+  const prodLabel = p => (p.brand?p.brand+' ':'')+p.spec;
+  resultsEl.innerHTML = breakdown + `
+    <div class="calc-result-row"><div class="calc-result-k">Inverter</div><div class="calc-result-v">${inv.qty} × ${escapeHtml(prodLabel(inv.product))}</div></div>
+    <div class="calc-result-row"><div class="calc-result-k">Battery</div><div class="calc-result-v">${bat.qty} × ${escapeHtml(prodLabel(bat.product))}<br><span style="font-weight:400;color:var(--muted);">${bat.totalCapacity.toFixed(1)} kWh total</span></div></div>
+    <div class="calc-result-row"><div class="calc-result-k">Solar Panels</div><div class="calc-result-v">${pan.qty} × ${escapeHtml(prodLabel(pan.product))}<br><span style="font-weight:400;color:var(--muted);">${(pan.totalCapacity/1000).toFixed(2)} kW array</span></div></div>
+  `;
+  createBtn.disabled = false;
+  lastEstimate = {inv, bat, pan, requiredKVA};
+}
+
+function createQuoteFromEstimate(){
+  if(!lastEstimate) return;
+  const {inv, bat, pan} = lastEstimate;
+  const addItem = (items, product, qty)=>{
+    items.push({id:uid(), productId:product.id, description:(product.brand?product.brand+' ':'')+product.spec, qty, unitCost:product.unitCost, taxable:product.taxable});
+  };
+  const items = [];
+  addItem(items, bat.product, bat.qty);
+  addItem(items, inv.product, inv.qty);
+  addItem(items, pan.product, pan.qty);
+
+  const cableQty = Math.max(20, Math.round((pan.qty * 2.5) / 10) * 10);
+  const accessoryDefs = [
+    {test:/cable/i, qty:cableQty},
+    {test:/surge/i, qty:1},
+    {test:/roof/i, qty:1},
+    {test:/change ?over/i, qty:1},
+    {test:/logistic/i, qty:1},
+    {test:/installation/i, qty:1},
+  ];
+  accessoryDefs.forEach(def=>{
+    const p = catalog.find(x=>x.category==='Accessory' && def.test.test(x.spec));
+    if(p) addItem(items, p, def.qty);
+  });
+
+  const newPkg = {id:uid(), title:`Estimated System — ${(inv.product.capacity*inv.qty)}KVA / ${bat.totalCapacity.toFixed(0)}kWh`, items};
+  packages.push(newPkg);
+  settings.viewMode = 'single';
+  settings.singlePackageId = newPkg.id;
+  renderPackages();
+  scheduleSave();
+  switchView('builder');
+}
+
+function bindCalculatorControls(){
+  ['calcBackupHours','calcSunHours','calcDod','calcMargin','loadOverride'].forEach(id=>{
+    document.getElementById(id).oninput = runCalculator;
+  });
+  document.getElementById('addApplianceBtn').onclick = ()=>{
+    const name = document.getElementById('applianceName').value.trim();
+    const watts = parseFloat(document.getElementById('applianceWatts').value)||0;
+    const qty = parseFloat(document.getElementById('applianceQty').value)||1;
+    if(!name || watts<=0){ alert('Enter an appliance name and wattage.'); return; }
+    calcAppliances.push({id:uid(), name, watts, qty});
+    document.getElementById('applianceName').value='';
+    document.getElementById('applianceWatts').value='';
+    document.getElementById('applianceQty').value='1';
+    renderApplianceList(); runCalculator();
+  };
+  document.getElementById('calcCreateBtn').onclick = createQuoteFromEstimate;
 }
 
 /* ================= TEMPLATES ================= */

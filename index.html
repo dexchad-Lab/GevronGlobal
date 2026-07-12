@@ -28,22 +28,44 @@
   .icon{width:18px;height:18px;flex:none;}
   a{color:var(--red-dark);}
 
-  /* ============ AUTH OVERLAY ============ */
-  #authOverlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(135deg,var(--ink) 0%,#2a2f37 100%);padding:20px;}
-  #authOverlay::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;
+  /* ============ AUTH / ADMIN ACCESS HOMEPAGE ============ */
+  #authOverlay{position:fixed;inset:0;z-index:1000;background:var(--paper);overflow-y:auto;}
+  .auth-shell{display:grid;grid-template-columns:1.05fr 1fr;min-height:100vh;}
+  .auth-brand-panel{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--ink) 0%,#2a2f37 100%);
+    color:#fff;padding:56px 56px;display:flex;flex-direction:column;justify-content:space-between;}
+  .auth-brand-panel::after{content:"";position:absolute;right:-100px;top:-100px;width:380px;height:380px;border-radius:50%;
     background:radial-gradient(circle,rgba(227,30,36,.35),transparent 70%);}
-  .auth-card{position:relative;z-index:1;background:var(--paper);border-radius:16px;padding:36px 40px 32px 40px;
-    width:100%;max-width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.35);}
-  .auth-logo{height:44px;margin-bottom:8px;}
-  .auth-tag{display:block;color:#3a3d42;font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;}
-  .auth-card h2{font-size:17px;margin:0 0 6px 0;color:var(--ink);}
-  .auth-sub{font-size:12.5px;color:var(--muted);margin:0 0 20px 0;line-height:1.5;}
-  .auth-card .field{text-align:left;margin-bottom:12px;}
-  .auth-card .field label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
-  .auth-card .field input{width:100%;border:1px solid var(--line);border-radius:7px;padding:10px 12px;font-size:14px;margin-top:4px;}
-  .auth-btn{width:100%;padding:11px;font-size:13.5px;margin-top:6px;}
+  .auth-brand-panel::before{content:"";position:absolute;left:-120px;bottom:-140px;width:320px;height:320px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.05),transparent 70%);}
+  .auth-brand-top{position:relative;z-index:1;}
+  .auth-logo-lg{height:38px;filter:brightness(0) invert(1);margin-bottom:26px;display:block;}
+  .auth-tagline{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c4c8ce;margin:0 0 30px 0;}
+  .auth-headline{font-size:33px;font-weight:800;line-height:1.18;letter-spacing:-.01em;margin:0 0 16px 0;max-width:440px;}
+  .auth-desc{color:#c4c8ce;font-size:14.5px;line-height:1.65;max-width:420px;margin:0 0 32px 0;}
+  .auth-feature-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:15px;}
+  .auth-feature-list li{font-size:13.5px;color:#dfe2e6;display:flex;gap:11px;align-items:flex-start;line-height:1.5;}
+  .auth-feature-list li b{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.1);
+    display:flex;align-items:center;justify-content:center;font-size:13px;}
+  .auth-brand-foot{position:relative;z-index:1;font-size:11.5px;color:#7d838d;margin-top:40px;}
+  .auth-form-panel{display:flex;align-items:center;justify-content:center;padding:40px 32px;}
+  .auth-form-inner{width:100%;max-width:360px;}
+  .auth-eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red-dark);margin:0 0 12px 0;}
+  .auth-form-inner h2{font-size:20px;margin:0 0 6px 0;color:var(--ink);}
+  .auth-sub{font-size:13px;color:var(--muted);margin:0 0 24px 0;line-height:1.5;}
+  .auth-form-inner .field{text-align:left;margin-bottom:14px;}
+  .auth-form-inner .field label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
+  .auth-form-inner .field input{width:100%;border:1px solid var(--line);border-radius:8px;padding:11px 13px;font-size:14px;margin-top:5px;}
+  .auth-btn{width:100%;padding:12px;font-size:13.5px;margin-top:8px;}
   .auth-error{color:#c0392b;font-size:12px;min-height:16px;margin:4px 0 0 0;text-align:left;}
+  .auth-form-foot{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);}
+  @media (max-width:860px){
+    .auth-shell{grid-template-columns:1fr;}
+    .auth-brand-panel{padding:36px 26px;}
+    .auth-headline{font-size:26px;}
+    .auth-feature-list{display:none;}
+    .auth-brand-foot{margin-top:20px;}
+    .auth-form-panel{padding:36px 26px;}
+  }
 
   /* ============ APP SHELL ============ */
   .app-shell{display:flex;min-height:100vh;}
@@ -165,7 +187,6 @@
   .chip .v{font-size:13px;font-weight:700;color:var(--ink);}
 
   .pkg-head{margin:8px 0 16px 0;}
-  .pkg-head.continued{margin-top:0;}
   .pkg-eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 4px 0;}
   .pkg-title-row{display:flex;align-items:center;gap:10px;border-bottom:3px solid var(--ink);padding-bottom:12px;}
   .pkg-title-row input{flex:1;border:none;color:var(--ink);font-weight:800;font-size:21px;padding:2px;background:transparent;font-family:inherit;}
@@ -224,6 +245,28 @@
 
   .settings-hint{max-width:900px;margin:0 auto 30px auto;text-align:center;font-size:12px;color:var(--muted);}
   .settings-hint a{color:var(--red-dark);font-weight:600;cursor:pointer;text-decoration:underline;}
+
+  .viewmode-picker{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:20px;}
+  .viewmode-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .seg-toggle{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;flex:none;}
+  .seg-toggle button{border:none;border-radius:0;background:#fff;padding:8px 14px;font-size:12.5px;font-weight:600;color:var(--ink-2);border-right:1px solid var(--line);}
+  .seg-toggle button:last-child{border-right:none;}
+  .seg-toggle button.active{background:var(--ink);color:#fff;}
+  .viewmode-sub{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .viewmode-select{border:1px solid var(--line);border-radius:7px;padding:8px 10px;font-size:13px;min-width:220px;}
+  .viewmode-hint{font-size:12.5px;color:var(--muted);font-style:italic;}
+  .combo-row{display:flex;gap:8px;flex-wrap:wrap;}
+  .combo-pill{border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:12.5px;font-weight:600;background:#fff;color:var(--ink-2);}
+  .combo-pill.active{background:var(--red);border-color:var(--red);color:#fff;}
+
+  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:6px;}
+  .compare-col{border:1px solid var(--line);border-radius:10px;padding:20px;background:var(--paper);}
+  table.quote.compact thead th{padding:6px 8px;font-size:10.5px;}
+  table.quote.compact tbody td{padding:5px 8px;font-size:12px;}
+  table.quote.compact{min-width:280px;}
+  table.quote.compact thead th.qty{width:44px;}
+  table.quote.compact thead th.cost{width:90px;}
+  @media (max-width:900px){.compare-grid{grid-template-columns:1fr;}}
 
   .theme-picker{margin-bottom:22px;}
   .theme-options{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
@@ -323,7 +366,18 @@
     .no-print{display:none !important;}
     #builderView{display:block !important;}
     .view-inner{max-width:100%;margin:0;}
-    .client-bar,.row-actions,.add-pkg-wrap,.settings-hint,.theme-picker{display:none !important;}
+    .client-bar,.row-actions,.add-pkg-wrap,.settings-hint,.theme-picker,.viewmode-picker{display:none !important;}
+    .compare-grid{grid-template-columns:1fr 1fr !important;gap:12px;}
+    .compare-col{padding:10px;border-radius:4px;}
+    table.quote.compact{min-width:0;}
+    table.quote.compact thead th.qty{width:42px;}
+    table.quote.compact thead th.cost{width:70px;}
+    table.quote.compact thead th{padding:5px 4px;font-size:8px;}
+    table.quote.compact tbody td{padding:4px 4px;font-size:9.5px;}
+    table.quote.compact td.qty input{padding:2px 1px;}
+    .compare-col .pkg-title-row input{font-size:15px;}
+    .compare-col .totals-plain .trow{font-size:10.5px;padding:3px 2px;}
+    .compare-col .totals-plain .trow.grand{font-size:11.5px;padding:7px 10px;}
     .package-page,.closing-block{box-shadow:none;border:none;border-radius:0;page-break-after:always;margin:0 auto;padding:0;max-width:100%;}
     .package-page:last-of-type{page-break-after:auto;}
     .closing-block{page-break-inside:avoid;page-break-after:auto;}
@@ -361,25 +415,44 @@
 <body>
 
 <div id="authOverlay">
-  <div class="auth-card">
-    <img id="authLogoImg" alt="Gevron Global Limited" class="auth-logo">
-    <span class="auth-tag">• Power • Automation • Security</span>
-
-    <div id="authSetup" style="display:none;">
-      <h2>Set up workspace access</h2>
-      <p class="auth-sub">Create a PIN to protect this quoting workspace. Share it only with people who should have access.</p>
-      <div class="field"><label>New PIN</label><input type="password" id="setupPin" placeholder="At least 4 characters" autocomplete="new-password"></div>
-      <div class="field"><label>Confirm PIN</label><input type="password" id="setupPinConfirm" placeholder="Re-enter PIN" autocomplete="new-password"></div>
-      <p class="auth-error" id="setupError"></p>
-      <button class="primary auth-btn" id="setupBtn">Create &amp; Continue</button>
+  <div class="auth-shell">
+    <div class="auth-brand-panel">
+      <div class="auth-brand-top">
+        <img id="authLogoImg" alt="Gevron Global Limited" class="auth-logo-lg">
+        <p class="auth-tagline">• Power • Automation • Security</p>
+        <h1 class="auth-headline">Quote Builder<br>Admin Access</h1>
+        <p class="auth-desc">Build, price and export branded power-system quotations for Gevron Global Limited clients — all in one private workspace.</p>
+        <ul class="auth-feature-list">
+          <li><b>⚡</b> One product catalog of inverters, batteries &amp; panels, reused on every quote</li>
+          <li><b>📄</b> Export polished, client-ready branded PDF quotations</li>
+          <li><b>🗂</b> Save package configurations as templates and reload them anytime</li>
+        </ul>
+      </div>
+      <div class="auth-brand-foot">© <span id="authYear"></span> Gevron Global Limited</div>
     </div>
+    <div class="auth-form-panel">
+      <div class="auth-form-inner">
+        <p class="auth-eyebrow">Admin Access</p>
 
-    <div id="authLogin" style="display:none;">
-      <h2>Welcome back</h2>
-      <p class="auth-sub">Enter the workspace PIN to continue.</p>
-      <div class="field"><label>Access PIN</label><input type="password" id="loginPin" placeholder="••••" autocomplete="current-password"></div>
-      <p class="auth-error" id="loginError"></p>
-      <button class="primary auth-btn" id="loginBtn">Unlock Dashboard</button>
+        <div id="authSetup" style="display:none;">
+          <h2>Set up workspace access</h2>
+          <p class="auth-sub">Create a PIN to protect this quoting workspace. Share it only with people who should have access.</p>
+          <div class="field"><label>New PIN</label><input type="password" id="setupPin" placeholder="At least 4 characters" autocomplete="new-password"></div>
+          <div class="field"><label>Confirm PIN</label><input type="password" id="setupPinConfirm" placeholder="Re-enter PIN" autocomplete="new-password"></div>
+          <p class="auth-error" id="setupError"></p>
+          <button class="primary auth-btn" id="setupBtn">Create &amp; Continue</button>
+        </div>
+
+        <div id="authLogin" style="display:none;">
+          <h2>Welcome back</h2>
+          <p class="auth-sub">Enter the workspace PIN to continue.</p>
+          <div class="field"><label>Access PIN</label><input type="password" id="loginPin" placeholder="••••" autocomplete="current-password"></div>
+          <p class="auth-error" id="loginError"></p>
+          <button class="primary auth-btn" id="loginBtn">Unlock Dashboard</button>
+        </div>
+
+        <p class="auth-form-foot">Gevron Global Limited · Internal quoting workspace</p>
+      </div>
     </div>
   </div>
 </div>
@@ -487,6 +560,8 @@
             <div class="field"><label>Lead Time</label><input type="text" id="leadTime" placeholder="e.g. 3–12 days"></div>
           </div>
 
+          <div class="viewmode-picker no-print" id="viewModePicker"></div>
+
           <div class="theme-picker no-print">
             <p class="section-label" style="margin-bottom:10px;">Quotation Style</p>
             <div class="theme-options" id="themeOptions"></div>
@@ -495,7 +570,7 @@
           <div id="quoteDocument" class="theme-editorial">
             <div id="packagesContainer"></div>
 
-            <div class="add-pkg-wrap no-print">
+            <div class="add-pkg-wrap no-print" id="addPkgWrap">
               <button id="addPackageBtn" class="primary">+ Add Package</button>
             </div>
 
@@ -593,7 +668,7 @@ const CATEGORY_PLURAL = {Inverter:"Inverters", Battery:"Batteries", "Solar Panel
 const MAIN_KEY = 'gevron-data';
 const TEMPLATES_KEY = 'gevron-templates';
 const AUTH_KEY = 'gevron-auth';
-const BRAND_TAGLINE = "Power &amp; Automation Security";
+const BRAND_TAGLINE = "• Power • Automation • Security";
 
 const DEFAULT_CATALOG = [
   {id:"p1", category:"Inverter", brand:"Deye", spec:"16kVA Hybrid Inverter", unitCost:4000000, taxable:false},
@@ -668,6 +743,7 @@ const DEFAULT_SETTINGS = {
   validUntil:defaultDate(30),
   leadTime:"3–12 days",
   theme:"editorial",
+  viewMode:"all", singlePackageId:"", compareIds:[],
   timeline:"3 - 12 days after initial payment confirmation, subject to site readiness and material logistics.",
   bankName:"FCMB", bankAccountName:"Gevron Global Limited", bankAccountNumber:"0677116010",
   site:"www.gevronglobal.com", phone:"(+234) 815 655 1506", ig:"@gevronglobal",
@@ -1004,124 +1080,285 @@ function chipHtml(label, value){
   return `<div class="chip"><div class="k">${escapeHtml(label)}</div><div class="v">${escapeHtml(value)}</div></div>`;
 }
 
-function renderPackages(){
-  const container = document.getElementById('packagesContainer');
-  container.innerHTML='';
-  const isSingle = packages.length <= 1;
+function packageLetter(pkg){
+  const idx = packages.indexOf(pkg);
+  return String.fromCharCode(65 + Math.max(idx,0));
+}
+
+function getDisplayPackages(){
+  const mode = settings.viewMode || 'all';
+  if(mode==='single'){
+    const p = packages.find(p=>p.id===settings.singlePackageId) || packages[0];
+    return p ? [p] : [];
+  }
+  if(mode==='compare'){
+    let ids = settings.compareIds || [];
+    let chosen = ids.map(id=>packages.find(p=>p.id===id)).filter(Boolean);
+    if(chosen.length!==2) chosen = packages.slice(0,2);
+    return chosen;
+  }
+  return packages;
+}
+
+function itemRowHtml(it, i, compact){
+  return `
+    <tr data-item="${it.id}">
+      ${compact ? '' : `<td class="num">${i+1}</td>`}
+      <td>
+        <select data-f="product" class="no-print">
+          <option value="">— Custom item —</option>
+          ${catalogOptionsHtml(it.productId)}
+        </select>
+        <input type="text" data-f="description" value="${escapeHtml(it.description)}" style="margin-top:2px;">
+      </td>
+      <td class="qty"><input type="number" data-f="qty" value="${it.qty}"></td>
+      ${compact ? '' : `<td class="cost"><input type="number" data-f="unitCost" value="${it.unitCost}"></td>`}
+      <td class="tax no-print">
+        <input type="checkbox" data-f="taxable" ${it.taxable?'checked':''} title="VATable — applies 7.5% VAT to this line internally; not shown on the exported PDF">
+      </td>
+      <td class="total" id="total-${it.id}">${plainNum((it.qty||0)*(it.unitCost||0))}</td>
+      <td class="del no-print"><button class="ghost small" data-del="1">✕</button></td>
+    </tr>
+  `;
+}
+
+function packageBlockHtml(pkg, opts){
+  const totals = computeTotals(pkg);
+  const letter = packageLetter(pkg);
+  const compact = !!opts.compact;
+  const rows = pkg.items.map((it,i)=>itemRowHtml(it,i,compact)).join('');
+  return `
+    <div class="pkg-head">
+      ${opts.showEyebrow ? `<p class="pkg-eyebrow">Package ${letter}</p>` : ''}
+      <div class="pkg-title-row ${opts.singleStyle?'single':''}">
+        <input type="text" value="${escapeHtml(pkg.title)}" data-pkgtitle>
+        ${opts.showRemove ? `<button class="ghost small no-print" data-delpkg>✕ Remove Package</button>` : ''}
+      </div>
+    </div>
+
+    <div class="table-scroll">
+    <table class="quote ${compact?'compact':''}">
+      <thead><tr>
+        ${compact ? '' : '<th class="num">S/N</th>'}<th>Description</th><th class="qty">Qty</th>
+        ${compact ? '' : '<th class="cost">Unit Cost (₦)</th>'}<th class="tax no-print">VAT?</th><th class="cost">Total (₦)</th><th class="del no-print"></th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    </div>
+
+    <div class="row-actions no-print"><button class="small" data-additem>+ Add Item</button></div>
+
+    <div class="totals-plain">
+      <div class="trow"><span>Sub Total</span><span id="sub-${pkg.id}">${naira(totals.subtotal)}</span></div>
+      <div class="trow"><span>VAT (7.5%)</span><span id="vat-${pkg.id}">${naira(totals.vat)}</span></div>
+      <div class="trow grand"><span>Total Cost</span><span id="grand-${pkg.id}">${naira(totals.total)}</span></div>
+    </div>
+  `;
+}
+
+function bindPackageBlock(root, pkg){
+  root.querySelector('[data-pkgtitle]').oninput = e=>{ pkg.title=e.target.value; scheduleSave(); };
+  const delPkgBtn = root.querySelector('[data-delpkg]');
+  if(delPkgBtn) delPkgBtn.onclick = ()=>{
+    if(!confirm('Remove this package?')) return;
+    packages = packages.filter(p=>p.id!==pkg.id);
+    renderPackages(); scheduleSave();
+  };
+  const addBtn = root.querySelector('[data-additem]');
+  if(addBtn) addBtn.onclick = ()=>{
+    pkg.items.push({id:uid(), productId:'', description:'New Item', qty:1, unitCost:0, taxable:true});
+    renderPackages(); scheduleSave();
+  };
+  pkg.items.forEach(it=>{
+    const tr = root.querySelector(`tr[data-item="${it.id}"]`);
+    if(!tr) return;
+    tr.querySelector('[data-f=product]').onchange = e=>{
+      const chosen = catalog.find(p=>p.id===e.target.value);
+      if(chosen){
+        it.productId = chosen.id;
+        it.description = (chosen.brand?chosen.brand+' ':'')+chosen.spec;
+        it.unitCost = chosen.unitCost; it.taxable = chosen.taxable;
+      } else { it.productId=''; }
+      renderPackages(); scheduleSave();
+    };
+    tr.querySelector('[data-f=description]').oninput = e=>{ it.description=e.target.value; scheduleSave(); };
+    tr.querySelector('[data-f=qty]').oninput = e=>{ it.qty=parseFloat(e.target.value)||0; updateItemAndTotals(pkg,it,tr); scheduleSave(); };
+    const costInput = tr.querySelector('[data-f=unitCost]');
+    if(costInput) costInput.oninput = e=>{ it.unitCost=parseFloat(e.target.value)||0; updateItemAndTotals(pkg,it,tr); scheduleSave(); };
+    tr.querySelector('[data-f=taxable]').onchange = e=>{ it.taxable=e.target.checked; updateItemAndTotals(pkg,it,tr); scheduleSave(); };
+    const delBtn = tr.querySelector('[data-del]');
+    if(delBtn) delBtn.onclick = ()=>{
+      pkg.items = pkg.items.filter(x=>x.id!==it.id);
+      renderPackages(); scheduleSave();
+    };
+  });
+}
+
+function docHeroHtml(title, lead){
+  return `
+    <p class="doc-eyebrow">${BRAND_TAGLINE}</p>
+    <h1 class="doc-h1">${title}</h1>
+    <p class="doc-lead">${lead}</p>
+    <div class="chip-row">
+      ${chipHtml('Prepared', settings.quoteDate)}
+      ${chipHtml('Valid until', settings.validUntil)}
+      ${chipHtml('Lead time', settings.leadTime)}
+      ${chipHtml('Prepared for', settings.preparedFor)}
+    </div>
+  `;
+}
+
+function docHeaderHtml(){
+  return `<div class="doc-header"><img src="${LOGO_SRC}" alt="Gevron Global Limited"><span class="doc-ref">Quotation${settings.quoteRef?(' · Ref '+escapeHtml(settings.quoteRef)):''}</span></div>`;
+}
+
+function renderStandardPages(container, display){
+  const isSingle = display.length <= 1;
   const mainTitle = isSingle ? "Power System Configuration Quote" : "Power System Configuration Packages";
   const mainSub = isSingle
     ? "This configuration has been carefully engineered to match your performance needs and budget preferences, covering everything from core equipment through installation and commissioning."
     : "Each option below is carefully engineered to match your performance needs and budget preferences, covering everything from core equipment through installation and commissioning.";
-  const availText = isSingle
-    ? "We remain available to answer any questions or provide further clarification on this quotation."
-    : "We remain available to guide you in selecting the most suitable option.";
+
+  display.forEach((pkg, idx)=>{
+    const page = document.createElement('div');
+    page.className='package-page';
+    page.innerHTML = `
+      <div class="page-inner">
+      ${docHeaderHtml()}
+      ${idx===0 ? docHeroHtml(mainTitle, mainSub) : ``}
+      ${packageBlockHtml(pkg, {compact:false, showEyebrow:!isSingle, singleStyle:isSingle, showRemove:!isSingle})}
+      </div>
+    `;
+    bindPackageBlock(page, pkg);
+    container.appendChild(page);
+  });
+}
+
+function renderComparePage(container, display){
+  const page = document.createElement('div');
+  page.className = 'package-page compare-page';
+
+  if(display.length < 2){
+    page.innerHTML = `
+      <div class="page-inner">
+      ${docHeaderHtml()}
+      ${docHeroHtml("Compare Package Options", "Add at least two packages (use “All Packages” view), then come back here to compare them side by side.")}
+      </div>
+    `;
+    container.appendChild(page);
+    return;
+  }
+
+  const [pkgA, pkgB] = display;
+  page.innerHTML = `
+    <div class="page-inner">
+    ${docHeaderHtml()}
+    ${docHeroHtml("Compare Your Package Options", "A side-by-side look at two configurations to help you choose the option that best fits your needs and budget.")}
+    <div class="compare-grid">
+      <div class="compare-col" data-col="a"></div>
+      <div class="compare-col" data-col="b"></div>
+    </div>
+    </div>
+  `;
+  const colA = page.querySelector('[data-col=a]');
+  const colB = page.querySelector('[data-col=b]');
+  colA.innerHTML = packageBlockHtml(pkgA, {compact:true, showEyebrow:true, singleStyle:false, showRemove:false});
+  colB.innerHTML = packageBlockHtml(pkgB, {compact:true, showEyebrow:true, singleStyle:false, showRemove:false});
+  bindPackageBlock(colA, pkgA);
+  bindPackageBlock(colB, pkgB);
+  container.appendChild(page);
+}
+
+function renderViewModeControls(){
+  const wrap = document.getElementById('viewModePicker');
+  if(!wrap) return;
+  const mode = settings.viewMode || 'all';
+  const modes = [
+    {id:'all', label:'All Packages'},
+    {id:'single', label:'Single Package'},
+    {id:'compare', label:'Compare Two'},
+  ];
+  let sub = '';
+  if(mode==='single'){
+    sub = !packages.length ? `<span class="viewmode-hint">Add a package first.</span>` : `
+      <select id="singlePackageSelect" class="viewmode-select">
+        ${packages.map(p=>`<option value="${p.id}" ${p.id===settings.singlePackageId?'selected':''}>${escapeHtml(p.title)}</option>`).join('')}
+      </select>`;
+  } else if(mode==='compare'){
+    if(packages.length<2){
+      sub = `<span class="viewmode-hint">Add at least 2 packages to compare.</span>`;
+    } else {
+      const combos = [];
+      for(let i=0;i<packages.length;i++){
+        for(let j=i+1;j<packages.length;j++) combos.push([packages[i], packages[j]]);
+      }
+      sub = `<div class="combo-row">` + combos.map(([a,b])=>{
+        const active = settings.compareIds && settings.compareIds[0]===a.id && settings.compareIds[1]===b.id;
+        return `<button type="button" class="combo-pill ${active?'active':''}" data-combo="${a.id}|${b.id}">${packageLetter(a)} vs ${packageLetter(b)}</button>`;
+      }).join('') + `</div>`;
+    }
+  } else {
+    sub = `<span class="viewmode-hint">Showing all ${packages.length} package${packages.length===1?'':'s'}.</span>`;
+  }
+  wrap.innerHTML = `
+    <p class="section-label" style="margin-bottom:10px;">Quote View</p>
+    <div class="viewmode-row">
+      <div class="seg-toggle">
+        ${modes.map(m=>`<button type="button" data-mode="${m.id}" class="${mode===m.id?'active':''}">${m.label}</button>`).join('')}
+      </div>
+      <div class="viewmode-sub">${sub}</div>
+    </div>
+  `;
+  wrap.querySelectorAll('.seg-toggle button').forEach(btn=>{
+    btn.onclick = ()=>{
+      settings.viewMode = btn.dataset.mode;
+      if(settings.viewMode==='single' && !settings.singlePackageId && packages.length){
+        settings.singlePackageId = packages[0].id;
+      }
+      if(settings.viewMode==='compare' && (!settings.compareIds || settings.compareIds.length!==2) && packages.length>=2){
+        settings.compareIds = [packages[0].id, packages[1].id];
+      }
+      renderPackages(); scheduleSave();
+    };
+  });
+  const sel = document.getElementById('singlePackageSelect');
+  if(sel) sel.onchange = e=>{ settings.singlePackageId = e.target.value; renderPackages(); scheduleSave(); };
+  wrap.querySelectorAll('[data-combo]').forEach(btn=>{
+    btn.onclick = ()=>{
+      const [a,b] = btn.dataset.combo.split('|');
+      settings.compareIds = [a,b];
+      renderPackages(); scheduleSave();
+    };
+  });
+}
+
+function renderPackages(){
+  renderViewModeControls();
+  const container = document.getElementById('packagesContainer');
+  container.innerHTML='';
+  const mode = settings.viewMode || 'all';
+  const display = getDisplayPackages();
+
+  const addPkgWrap = document.getElementById('addPkgWrap');
+  if(addPkgWrap) addPkgWrap.style.display = (mode==='all') ? '' : 'none';
+
+  let availText;
+  if(mode==='compare'){
+    availText = "We remain available to help you decide between these two options.";
+  } else if(display.length <= 1){
+    availText = "We remain available to answer any questions or provide further clarification on this quotation.";
+  } else {
+    availText = "We remain available to guide you in selecting the most suitable option.";
+  }
   const availEl = document.getElementById('availText');
   if(availEl) availEl.textContent = availText;
   syncFooterDisplay();
 
-  packages.forEach((pkg, idx)=>{
-    const totals = computeTotals(pkg);
-    const letter = String.fromCharCode(65+idx);
-    const page = document.createElement('div');
-    page.className='package-page';
-
-    const rows = pkg.items.map((it, i)=>`
-      <tr data-item="${it.id}">
-        <td class="num">${i+1}</td>
-        <td>
-          <select data-f="product" class="no-print">
-            <option value="">— Custom item —</option>
-            ${catalogOptionsHtml(it.productId)}
-          </select>
-          <input type="text" data-f="description" value="${escapeHtml(it.description)}" style="margin-top:2px;">
-        </td>
-        <td class="qty"><input type="number" data-f="qty" value="${it.qty}"></td>
-        <td class="cost"><input type="number" data-f="unitCost" value="${it.unitCost}"></td>
-        <td class="tax no-print">
-          <input type="checkbox" data-f="taxable" ${it.taxable?'checked':''} title="VATable — applies 7.5% VAT to this line internally; not shown on the exported PDF">
-        </td>
-        <td class="total" id="total-${it.id}">${plainNum((it.qty||0)*(it.unitCost||0))}</td>
-        <td class="del no-print"><button class="ghost small" data-del="1">✕</button></td>
-      </tr>
-    `).join('');
-
-    page.innerHTML = `
-      <div class="page-inner">
-      <div class="doc-header"><img src="${LOGO_SRC}" alt="Gevron Global Limited"><span class="doc-ref">Quotation${settings.quoteRef?(' · Ref '+escapeHtml(settings.quoteRef)):''}</span></div>
-      ${idx===0 ? `
-      <p class="doc-eyebrow">${BRAND_TAGLINE}</p>
-      <h1 class="doc-h1">${mainTitle}</h1>
-      <p class="doc-lead">${mainSub}</p>
-      <div class="chip-row">
-        ${chipHtml('Prepared', settings.quoteDate)}
-        ${chipHtml('Valid until', settings.validUntil)}
-        ${chipHtml('Lead time', settings.leadTime)}
-        ${chipHtml('Prepared for', settings.preparedFor)}
-      </div>
-      ` : ``}
-
-      <div class="pkg-head ${idx>0?'continued':''}">
-        ${!isSingle ? `<p class="pkg-eyebrow">Package ${letter}</p>` : ''}
-        <div class="pkg-title-row ${isSingle?'single':''}">
-          <input type="text" value="${escapeHtml(pkg.title)}" data-pkgtitle>
-          ${!isSingle ? `<button class="ghost small no-print" data-delpkg>✕ Remove Package</button>` : ''}
-        </div>
-      </div>
-
-      <div class="table-scroll">
-      <table class="quote">
-        <thead><tr>
-          <th class="num">S/N</th><th>Description</th><th class="qty">Qty</th>
-          <th class="cost">Unit Cost (₦)</th><th class="tax no-print">VAT?</th><th class="cost">Total (₦)</th><th class="del no-print"></th>
-        </tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-      </div>
-
-      <div class="row-actions no-print"><button class="small" data-additem>+ Add Item</button></div>
-
-      <div class="totals-plain">
-        <div class="trow"><span>Sub Total</span><span id="sub-${pkg.id}">${naira(totals.subtotal)}</span></div>
-        <div class="trow"><span>VAT (7.5%)</span><span id="vat-${pkg.id}">${naira(totals.vat)}</span></div>
-        <div class="trow grand"><span>Total Cost</span><span id="grand-${pkg.id}">${naira(totals.total)}</span></div>
-      </div>
-      </div>
-    `;
-
-    page.querySelector('[data-pkgtitle]').oninput = e=>{ pkg.title=e.target.value; scheduleSave(); };
-    const delPkgBtn = page.querySelector('[data-delpkg]');
-    if(delPkgBtn) delPkgBtn.onclick = ()=>{
-      if(!confirm('Remove this package?')) return;
-      packages = packages.filter(p=>p.id!==pkg.id);
-      renderPackages(); scheduleSave();
-    };
-    page.querySelector('[data-additem]').onclick = ()=>{
-      pkg.items.push({id:uid(), productId:'', description:'New Item', qty:1, unitCost:0, taxable:true});
-      renderPackages(); scheduleSave();
-    };
-    pkg.items.forEach(it=>{
-      const tr = page.querySelector(`tr[data-item="${it.id}"]`);
-      tr.querySelector('[data-f=product]').onchange = e=>{
-        const chosen = catalog.find(p=>p.id===e.target.value);
-        if(chosen){
-          it.productId = chosen.id;
-          it.description = (chosen.brand?chosen.brand+' ':'')+chosen.spec;
-          it.unitCost = chosen.unitCost; it.taxable = chosen.taxable;
-        } else { it.productId=''; }
-        renderPackages(); scheduleSave();
-      };
-      tr.querySelector('[data-f=description]').oninput = e=>{ it.description=e.target.value; scheduleSave(); };
-      tr.querySelector('[data-f=qty]').oninput = e=>{ it.qty=parseFloat(e.target.value)||0; updateItemAndTotals(pkg,it,tr); scheduleSave(); };
-      tr.querySelector('[data-f=unitCost]').oninput = e=>{ it.unitCost=parseFloat(e.target.value)||0; updateItemAndTotals(pkg,it,tr); scheduleSave(); };
-      tr.querySelector('[data-f=taxable]').onchange = e=>{ it.taxable=e.target.checked; updateItemAndTotals(pkg,it,tr); scheduleSave(); };
-      const delBtn = tr.querySelector('[data-del]');
-      if(delBtn) delBtn.onclick = ()=>{
-        pkg.items = pkg.items.filter(x=>x.id!==it.id);
-        renderPackages(); scheduleSave();
-      };
-    });
-    container.appendChild(page);
-  });
+  if(mode==='compare'){
+    renderComparePage(container, display);
+  } else {
+    renderStandardPages(container, display);
+  }
   renderDashboard();
 }
 
@@ -1131,6 +1368,7 @@ let authState = {pin:null};
 async function initAuth(){
   document.getElementById('authLogoImg').src = LOGO_SRC;
   document.getElementById('sidebarLogoImg').src = LOGO_SRC;
+  document.getElementById('authYear').textContent = new Date().getFullYear();
   authState = await storeGet(AUTH_KEY) || {pin:null};
   if(authState.pin){
     document.getElementById('authLogin').style.display = 'block';
@@ -1186,7 +1424,7 @@ function lockApp(){
   document.getElementById('authLogin').style.display = 'block';
   document.getElementById('loginPin').value = '';
   document.getElementById('loginError').textContent = '';
-  document.getElementById('authOverlay').style.display = 'flex';
+  document.getElementById('authOverlay').style.display = 'block';
   document.getElementById('appShell').style.display = 'none';
   document.getElementById('loginPin').focus();
 }

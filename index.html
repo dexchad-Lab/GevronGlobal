@@ -183,9 +183,11 @@
   table.quote tbody td{padding:9px 12px;border-bottom:1px solid #f0f0f0;vertical-align:middle;}
   table.quote tbody tr:nth-child(even){background:var(--stripe);}
   table.quote td.num{text-align:center;color:var(--muted);}
-  table.quote td.qty input,table.quote td.cost input{width:100%;border:1px solid transparent;background:transparent;padding:4px 6px;border-radius:4px;font-size:13px;text-align:right;}
-  table.quote td select{width:100%;border:1px solid transparent;background:transparent;padding:4px 6px;border-radius:4px;font-size:13px;}
+  table.quote td.qty input,table.quote td.cost input,table.quote td input[type=text]{width:100%;border:1px solid transparent;background:transparent;padding:4px 6px;border-radius:4px;font-size:13px;text-align:right;box-sizing:border-box;}
+  table.quote td select{width:100%;border:1px solid transparent;background:transparent;padding:4px 6px;border-radius:4px;font-size:13px;box-sizing:border-box;}
   table.quote td.qty input{text-align:center;}
+  table.quote td input[type=text]{text-align:left;}
+  table.quote tbody tr{page-break-inside:avoid;}
   table.quote td select:hover,table.quote td input:hover{border-color:var(--line);background:#fff;}
   table.quote td.tax{text-align:center;}
   table.quote td.total{text-align:right;font-weight:600;white-space:nowrap;}
@@ -194,7 +196,7 @@
   .row-actions{display:flex;gap:8px;margin-top:12px;}
   .add-pkg-wrap{text-align:center;margin-bottom:30px;}
 
-  .totals-plain{display:flex;flex-direction:column;align-items:flex-end;gap:0;margin-top:16px;}
+  .totals-plain{display:flex;flex-direction:column;align-items:flex-end;gap:0;margin-top:16px;page-break-inside:avoid;}
   .totals-plain .trow{display:flex;justify-content:space-between;gap:30px;width:100%;max-width:280px;padding:6px 4px;font-size:13.5px;}
   .totals-plain .trow span:first-child{color:var(--muted);}
   .totals-plain .trow span:last-child{font-weight:700;}
@@ -311,18 +313,41 @@
   }
 
   /* ============ PRINT ============ */
+  @page{ size:auto; margin:0; }
   @media print{
     *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important;}
-    body{background:#fff;}
-    .sidebar,.topbar,.sidebar-backdrop,.view:not(#builderView){display:none !important;}
-    .view-scroll{overflow:visible;padding:0;}
+    html,body{background:#fff;}
+    .sidebar,.topbar,.sidebar-backdrop,.view:not(#builderView),.menu-toggle{display:none !important;}
+    .view-scroll{overflow:visible;padding:0;height:auto;}
+    .main{height:auto;overflow:visible;}
     .no-print{display:none !important;}
     #builderView{display:block !important;}
+    .view-inner{max-width:100%;margin:0;}
     .client-bar,.row-actions,.add-pkg-wrap,.settings-hint,.theme-picker{display:none !important;}
     .package-page,.closing-block{box-shadow:none;border:none;border-radius:0;page-break-after:always;margin:0 auto;padding:0;max-width:100%;}
     .package-page:last-of-type{page-break-after:auto;}
     .closing-block{page-break-inside:avoid;page-break-after:auto;}
-    .page-inner{padding:20px 34px 0 34px;}
+    .page-inner{padding:14mm 16mm 10mm 16mm;}
+    .doc-header{margin-bottom:16px;padding-bottom:10px;}
+    .doc-eyebrow{margin-bottom:6px;}
+    .doc-h1{font-size:24px;margin-bottom:8px;}
+    .doc-lead{margin-bottom:14px;}
+    .chip-row{margin-bottom:20px;gap:8px;}
+    .chip{padding:6px 12px;}
+    .pkg-head{margin:0 0 10px 0;}
+    .pkg-title-row{padding-bottom:8px;}
+    .pkg-title-row input{font-size:18px;}
+    table.quote thead th{padding:7px 10px;}
+    table.quote tbody td{padding:6px 10px;}
+    table.quote thead{display:table-header-group;}
+    table.quote tbody{display:table-row-group;}
+    .totals-plain{margin-top:10px;}
+    .totals-plain .trow{padding:4px 4px;}
+    .totals-plain .trow.grand{padding:9px 16px;}
+    .closing-block{padding:14mm 16mm 10mm 16mm;}
+    .section-h2{margin-bottom:14px;padding-bottom:8px;}
+    .pay-grid{margin-bottom:18px;gap:12px;}
+    .pay-card{padding:12px 14px;}
     .table-scroll{overflow:visible;}
     table.quote{min-width:0;}
     table.quote td.tax,table.quote th.tax{display:none !important;}
